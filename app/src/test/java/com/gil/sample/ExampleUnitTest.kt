@@ -1,4 +1,4 @@
-package com.example.sampleapplication
+package com.gil.sample
 
 import org.junit.Test
 
