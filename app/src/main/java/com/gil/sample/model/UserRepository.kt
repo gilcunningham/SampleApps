@@ -28,10 +28,10 @@ class UserRepository {
     fun getUsers2() {
         userService.fetchUsers2(mUsers)
     }
-    
+
     fun getUsers3() {
-        userService.fetchUsers3 {
-            mUsers.value = it
+        userService.fetchUsers3 { users ->
+            mUsers.value = users
         }
     }
 
