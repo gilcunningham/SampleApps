@@ -1,10 +1,7 @@
 plugins {
-    //id("com.android.application")
     id("com.android.application")
-    //id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
-    //id("kotlin-android-extensions")
 }
 
 android {
@@ -33,8 +30,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        //jvmTarget = '11'
-        // userIR = true
     }
     buildFeatures {
         viewBinding = true

@@ -9,8 +9,8 @@ data class User(
     @SerializedName("gender") val gender: String,
     @SerializedName("status") val status: String) {
 
-    fun hello() {
-        println("test")
+    override fun toString(): String {
+        return "id: $id name: $name email: $email gender: $gender status: $status"
     }
 }
 

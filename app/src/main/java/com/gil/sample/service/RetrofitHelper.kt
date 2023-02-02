@@ -12,7 +12,6 @@ object RetrofitHelper {
     val baseUrl = "https://gorest.co.in/"
 
     val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    //val okHttp = OkHttpClient.Builder().addInterceptor(interceptor).build();
 
     val okHttp = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)
