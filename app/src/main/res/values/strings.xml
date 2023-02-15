@@ -9,4 +9,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="update_users_rx1_label">Get Users Rx1</string>
+    <string name="update_users_rx2_label">Get Users Rx2</string>
+    <string name="update_users_rx3_label">Get Users Rx3</string>
+
+    <string name="update_users_cr1_label">Get Users Cr1</string>
+    <string name="update_users_cr2_label">Get Users Cr2</string>
+    <string name="update_users_cr3_label">Get Users Cr3</string>
+
 </resources>
