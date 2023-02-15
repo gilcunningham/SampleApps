@@ -2,5 +2,10 @@ package com.gil.sample.service.api
 
 interface BaseApi {
 
-    fun getBaseUrl(): String
+    val baseUrl: String
+        get() = baseUrlImpl()
+
+    fun baseUrlImpl(): String {
+        return "https://gorest.co.in/"
+    }
 }
