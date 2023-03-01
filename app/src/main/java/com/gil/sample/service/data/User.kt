@@ -8,23 +8,23 @@ import com.squareup.moshi.JsonClass
 data class User(
 
     @Json(name = "id")
-    //@SerializedName("id")
+    @SerializedName("id")
     val id: Int,
 
     @Json(name = "name")
-    //@SerializedName("name")
+    @SerializedName("name")
     val name: String,
 
     @Json(name = "email")
-    //@SerializedName("email")
+    @SerializedName("email")
     val email: String,
 
     @Json(name = "gender")
-    //@SerializedName("gender")
+    @SerializedName("gender")
     val gender: String,
 
     @Json(name = "status")
-    //@SerializedName("status")
+    @SerializedName("status")
     val status: String) {
 
     //override fun toString(): String {

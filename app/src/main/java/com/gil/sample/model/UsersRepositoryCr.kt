@@ -1,5 +1,6 @@
 package com.gil.sample.model
 
+import androidx.lifecycle.asLiveData
 import com.gil.sample.service.UserServiceKt
 import com.gil.sample.service.data.User
 import kotlinx.coroutines.SupervisorJob
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
-class UserRepositoryKt : BaseUserRepository() {
+class UsersRepositoryCr : BaseUserRepository() {
 
     //TODO inject these or pass in
     private val mUserService = UserServiceKt()

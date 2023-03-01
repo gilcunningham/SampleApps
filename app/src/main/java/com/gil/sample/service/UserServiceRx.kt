@@ -28,7 +28,7 @@ class UserServiceRx {
         onNext: Consumer<List<User>>,
         onError: Consumer<Throwable>,
     ) {
-        Timber.d("disposables size: ${mUserServiceDisposable}")
+        Timber.d("disposables size: ${mUserServiceDisposable.size()}")
 
         mUserServiceDisposable.add(
             userApiRx.fetchUsers()
@@ -39,7 +39,7 @@ class UserServiceRx {
                 )
         )
 
-        Timber.d("disposables after add(), size: ${mUserServiceDisposable}")
+        Timber.d("disposables after add(), size: ${mUserServiceDisposable.size()}")
     }
 
     /**

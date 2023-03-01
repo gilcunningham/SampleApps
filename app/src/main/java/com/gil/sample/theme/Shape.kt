@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.theme
+package com.gil.sample.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
