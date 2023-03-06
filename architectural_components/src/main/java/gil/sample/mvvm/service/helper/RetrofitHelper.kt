@@ -3,7 +3,7 @@ package gil.sample.mvvm.service.helper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import gil.sample.mvvm.service.api.BaseApi
-import gil.sample.mvvm.service.api.UserApiKt
+import gil.sample.mvvm.service.api.UserApiCr
 import gil.sample.mvvm.service.api.UserApiRx
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
@@ -77,7 +77,7 @@ object RetrofitHelper {
 
     fun <T : BaseApi> instance(api: Class<T>): T {
         //TODO- work on better method
-        if (api.isAssignableFrom(UserApiKt::class.java)) {
+        if (api.isAssignableFrom(UserApiCr::class.java)) {
             Timber.d("instance UserApiKt")
             return moshiInstance.create(api)
         } else if (api.isAssignableFrom(UserApiRx::class.java)) {

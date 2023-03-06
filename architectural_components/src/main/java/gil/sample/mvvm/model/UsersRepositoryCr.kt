@@ -1,18 +1,30 @@
 package gil.sample.mvvm.model
 
-import gil.sample.mvvm.service.UserServiceKt
+import gil.sample.mvvm.service.UserServiceCr
 import gil.sample.mvvm.service.data.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+/**
+ * A [User]s repository.
+ * Demonstrates different code styles with Coroutines.
+ * 1. Anonymous Observer
+ * 2. Anonymous Consumers (onNext / onError)
+ * 3. Lambda expression
+ * 4. Anonymous Consumer with Observable subscribe in repo
+ *
+ * TODO : error handling
+ */
 class UsersRepositoryCr : BaseUserRepository() {
 
     //TODO inject these or pass in
-    private val mUserService = UserServiceKt()
+    private val mUserService = UserServiceCr()
 
     // TODO determine where applicable to use supervisor
     private val jobSupervisor = SupervisorJob()
@@ -30,7 +42,7 @@ class UsersRepositoryCr : BaseUserRepository() {
     }
 
     // fetch users
-    suspend fun updateUsers() {
+    suspend fun updateUsers() = withContext(Dispatchers.IO) {
         Timber.d("updateUsers()")
         users.value = mUserService.fetchUsers()
     }
