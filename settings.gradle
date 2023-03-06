@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "SampleApps"
-include ':app'
+include ':architectural_components'
