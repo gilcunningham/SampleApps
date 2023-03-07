@@ -8,6 +8,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import gil.sample.mvvm.R
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.view.widgets.UsersScreenCr
 import gil.sample.mvvm.viewmodel.UsersCrViewModel
@@ -15,11 +17,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A sample [Fragment] to display a list of [User]s.
  */
-class UsersCrFragment : Fragment() {
-
-    val LOG_TAG = UsersCrFragment::class.java.simpleName
+class UsersCrFragment : BaseFragment() {
 
     val mViewModel: UsersCrViewModel by viewModels()
 
@@ -41,7 +41,7 @@ class UsersCrFragment : Fragment() {
 
         // for testing and demo purposes only, not needed for functionality
         mViewModel.users.observe(viewLifecycleOwner) { users ->
-            Timber.tag(LOG_TAG).d("--- users cr updates ---")
+            Timber.d("--- users cr updates ---")
             users.forEach { user ->
                 Timber.d("user --> ${user.name} ${user.email}")
             }
@@ -50,10 +50,17 @@ class UsersCrFragment : Fragment() {
         // for testing and demo purposes only, not needed for functionality
         lifecycleScope.launch() {
             mViewModel.usersFlow.collect { users ->
-                Timber.tag(LOG_TAG).d("--- users cr flow updates ---")
+                Timber.d("--- users cr flow updates ---")
                 users.forEach { user ->
                     Timber.d("user --> ${user.name} ${user.email}")
                 }
+            }
+        }
+
+        mViewModel.onNext.observe(viewLifecycleOwner) { next ->
+            Timber.d("onNext - $next")
+            if (next) {
+                findNavController().navigate(R.id.action_usersCrFragment_next)
             }
         }
     }

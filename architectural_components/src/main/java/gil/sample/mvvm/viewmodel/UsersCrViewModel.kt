@@ -19,11 +19,7 @@ class UsersCrViewModel : BaseUsersViewModel() {
     val users: LiveData<List<User>> = userRepo.users.asLiveData()
 
     // example with Flow
-    val usersFlow: Flow<List<User>>
-        get() {
-            println("*** get usersFlow")
-            return userRepo.usersFlow
-        }
+    val usersFlow: Flow<List<User>> = userRepo.usersFlow
 
     fun onUpdateUsersCr() {
         Timber.d("onUpdateUsersCr()")

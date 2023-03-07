@@ -90,9 +90,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime:2.5.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     //implementation("android.arch.lifecycle:extensions:2.2.0")
     //implementation("android.arch.lifecycle:extensions:2.2.0")
     //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha05")
+
+    // Hilt //TODO
+    //implementation("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
 
     // Timber
     implementation("com.jakewharton.timber:timber:4.7.1")

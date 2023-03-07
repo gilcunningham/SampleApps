@@ -13,7 +13,7 @@ import timber.log.Timber
  * A [User]s repository.
  * Demonstrates Coroutines with LiveData and Flow functionality.
  *
- * TODO : error handling
+ * TODO : add error handling
  */
 class UsersRepositoryCr : BaseUserRepository() {
 
@@ -43,7 +43,6 @@ class UsersRepositoryCr : BaseUserRepository() {
 
     // update Flow user
     suspend fun updateUsersFlow() {
-        Timber.d("updateUsersFlow()")
         updateUsers {
             mUsersFlow.value = mUserService.fetchUsers()
         }

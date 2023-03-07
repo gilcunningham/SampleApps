@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
@@ -31,12 +30,10 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gil.sample.mvvm.R
 import gil.sample.mvvm.service.data.User
-import gil.sample.mvvm.viewmodel.UsersRxViewModel
 
 /**
  * Simple vertical list view to display a list of data. //TODO- make generic
@@ -53,8 +50,6 @@ fun SimpleListView(
     working: LiveData<Boolean> = MutableLiveData(false),
     onItemClick: (User) -> Unit = {}
 ) {
-
-
     // normalize values
     val header by remember { headerText }
     val list by listItems.observeAsState()
@@ -69,11 +64,10 @@ fun SimpleListView(
                 .fillMaxWidth()
                 .background(Color(0xFFA1A1A1)), // TODO: move to Color
             horizontalArrangement = Arrangement.Center
-
-            //horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 //TODO : too much VM logic in a view
+                // update to MutableStateFlow<Header>
                 text = if (showProgress == true) {
                     stringResource(header)
                 } else {
@@ -101,8 +95,7 @@ fun SimpleListView(
                             .background(
                                 if (index % 2 == 0) {
                                     Color(0xFFFFFFFF)
-                                }
-                                else {
+                                } else {
                                     Color(0xFFE1E1E1) // TODO: move to Colors
 
                                 }
