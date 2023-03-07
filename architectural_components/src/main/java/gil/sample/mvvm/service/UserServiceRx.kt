@@ -2,7 +2,7 @@ package gil.sample.mvvm.service
 
 import gil.sample.mvvm.service.api.UserApiRx
 import gil.sample.mvvm.service.data.User
-import gil.sample.mvvm.service.helper.RetrofitHelper
+import gil.sample.mvvm.service.helper.ApiHelper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -18,7 +18,7 @@ class UserServiceRx {
 
     private val mUserServiceDisposable = CompositeDisposable()
 
-    private val userApiRx = RetrofitHelper.instance(UserApiRx::class.java)
+    private val userApiRx = ApiHelper.instance(UserApiRx::class.java)
 
     fun fetchUsersObserver(usersObserver: Observer<List<User>>) {
         userApiRx.fetchUsers()

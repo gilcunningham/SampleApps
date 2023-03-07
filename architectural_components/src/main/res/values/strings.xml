@@ -13,6 +13,7 @@
     <string name="update_users_rx3_label">Get Users Rx3</string>
     <string name="update_users_rx4_label">Get Users Rx4</string>
 
+    <string name="update_users_cr_back">&lt;&lt; Back</string>
     <string name="update_users_cr1_label">Get Users Cr1</string>
     <string name="update_users_cr2_label">Get Users Cr2</string>
     <string name="update_users_cr3_label">Get Users Cr3</string>

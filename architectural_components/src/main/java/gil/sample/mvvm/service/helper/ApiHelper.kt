@@ -15,8 +15,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 
 //TODO: combine moshi and okhttp
-object RetrofitHelper {
+object ApiHelper {
 
+    // TODO: move to BaseA[i
     private val baseUrl = "https://gorest.co.in/"
 
     private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -28,6 +29,15 @@ object RetrofitHelper {
         .addInterceptor(interceptor)
         .build()
 
+    private val okInstance by lazy {
+        Retrofit.Builder()
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttp)
+            .baseUrl(baseUrl)
+            .build()
+    }
+
     private fun okInstance(url: String): Retrofit {
         val instance by lazy {
             Retrofit.Builder()
@@ -38,15 +48,6 @@ object RetrofitHelper {
                 .build()
         }
         return instance
-    }
-
-    private val okInstance by lazy {
-        Retrofit.Builder()
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttp)
-            .baseUrl(baseUrl)
-            .build()
     }
 
     private val moshi by lazy {
@@ -78,7 +79,7 @@ object RetrofitHelper {
     fun <T : BaseApi> instance(api: Class<T>): T {
         //TODO- work on better method
         if (api.isAssignableFrom(UserApiCr::class.java)) {
-            Timber.d("instance UserApiKt")
+            Timber.d("instance UserApiCr")
             return moshiInstance.create(api)
         } else if (api.isAssignableFrom(UserApiRx::class.java)) {
             Timber.d("instance UserApiRx")

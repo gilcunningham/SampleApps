@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.view.widgets.UsersScreenCr
 import gil.sample.mvvm.viewmodel.UsersCrViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 /**
@@ -39,10 +41,19 @@ class UsersCrFragment : Fragment() {
 
         // for testing and demo purposes only, not needed for functionality
         mViewModel.users.observe(viewLifecycleOwner) { users ->
-            Timber.tag(LOG_TAG).d("--- users rx updates ---")
+            Timber.tag(LOG_TAG).d("--- users cr updates ---")
             users.forEach { user ->
                 Timber.d("user --> ${user.name} ${user.email}")
-                Timber.tag(LOG_TAG).d("user --> ${user.name} ${user.email}")
+            }
+        }
+
+        // for testing and demo purposes only, not needed for functionality
+        lifecycleScope.launch() {
+            mViewModel.usersFlow.collect { users ->
+                Timber.tag(LOG_TAG).d("--- users cr flow updates ---")
+                users.forEach { user ->
+                    Timber.d("user --> ${user.name} ${user.email}")
+                }
             }
         }
     }
