@@ -1,6 +1,6 @@
 package gil.sample.mvvm.service
 
-abstract class BaseService {
+abstract class BaseUserService {
 
     abstract fun onCleared()
 }

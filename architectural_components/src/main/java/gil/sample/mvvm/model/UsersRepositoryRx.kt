@@ -32,7 +32,7 @@ class UsersRepositoryRx : BaseUserRepository() {
      * This implementation uses an anonymous [Observer] to consume the [Observable].
      */
     fun updateUsersWithObserver() {
-        updateUsersImpl {
+        updateUsers {
             mUserServiceRx.fetchUsersObserver(
                 object : Observer<List<User>> {
                     override fun onNext(newUsers: List<User>) {
@@ -62,7 +62,7 @@ class UsersRepositoryRx : BaseUserRepository() {
      * This implementation uses anonymous [Consumer]s to consume the [Observable].
      */
     fun updateUsersWithConsumer() {
-        updateUsersImpl {
+        updateUsers {
             mUserServiceRx.fetchUsersConsumer(
                 { newUsers ->
                     users.value = newUsers.shuffled()
@@ -79,7 +79,7 @@ class UsersRepositoryRx : BaseUserRepository() {
      * Note: The service is responsible for error handling.
      */
     fun updateUsersWithLambda() {
-        updateUsersImpl {
+        updateUsers {
             mUserServiceRx.fetchUsersLambda { newUsers ->
                 users.value = newUsers.shuffled()
                 doingWork.value = false
@@ -92,7 +92,7 @@ class UsersRepositoryRx : BaseUserRepository() {
      * This implementation subscribes to the Observable and consumes onNext and onError.
      */
     fun updateUsers() {
-        updateUsersImpl {
+        updateUsers {
             mUserDisposables.add(
                 mUserServiceRx.fetchUsers()
                     .subscribeOn(Schedulers.io())
@@ -108,15 +108,6 @@ class UsersRepositoryRx : BaseUserRepository() {
         }
     }
 
-    /**
-     * Update users utility method.
-     * @param updateUsers Update users lambda.
-     */
-    private fun updateUsersImpl(updateUsers: () -> Unit) {
-        doingWork.value = true
-        updateUsers()
-    }
-
     @Override
     override fun onCleared() {
         mUserServiceRx.onCleared()
@@ -124,4 +115,14 @@ class UsersRepositoryRx : BaseUserRepository() {
         mUserDisposables.clear()
         Timber.d("onCleared: disposable after clear(), size: ${mUserDisposables.size()}")
     }
+
+    /**
+     * Update users utility method.
+     * @param updateUsers Update users lambda.
+     */
+    private fun updateUsers(updateUsersDelegate: () -> Unit) {
+        doingWork.value = true
+        updateUsersDelegate()
+    }
+
 }

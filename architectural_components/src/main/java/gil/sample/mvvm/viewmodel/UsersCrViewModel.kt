@@ -2,6 +2,7 @@ package gil.sample.mvvm.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import gil.sample.mvvm.R
 import gil.sample.mvvm.model.UsersRepositoryCr
 import gil.sample.mvvm.service.data.User
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,9 @@ class UsersCrViewModel : BaseUsersViewModel() {
 
     val userRepo = UsersRepositoryCr()
 
-    // VM exposes the repos data
+    // VM exposes the repo's [LiveData]
+    val doingWork: LiveData<Boolean> = userRepo.doingWork.asLiveData()
+
     val users: LiveData<List<User>> = userRepo.users.asLiveData()
 
     // example with Flow
@@ -22,21 +25,30 @@ class UsersCrViewModel : BaseUsersViewModel() {
             return userRepo.usersFlow
         }
 
-    fun onUpdateUsersKt() {
-        Timber.d("onUpdateUsersKt()")
-        viewModelScope.launch {
+    fun onUpdateUsersCr() {
+        Timber.d("onUpdateUsersCr()")
+        updateUsers {
             userRepo.updateUsers()
         }
     }
 
-    fun onUpdateUsersKt2() {
-        Timber.d("onUpdateUsersKt2()")
+    fun onUpdateUsersCr2() {
+        Timber.d("onUpdateUsersCr2()")
         viewModelScope.launch {
             userRepo.updateUsersFlow()
         }
     }
 
-    fun onUpdateUsersKt3() {
+    fun onUpdateUsersCr3() {
         // TODO
+    }
+
+    private fun updateUsers(
+        updateUsersDelegate: suspend () -> Unit
+    ) {
+        viewModelScope.launch {
+            listHeader.value = R.string.users_listview_updating_label
+            updateUsersDelegate()
+        }
     }
 }
