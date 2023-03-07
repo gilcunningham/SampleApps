@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Sample MVVM App</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="users_rx_fragment_label">Users With Rx</string>
+    <string name="users_cr_fragment_label">Users With Coroutines</string>
+    <string name="users_last_fragment_label">Last Fragment</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="update_users_rx_next">Next >></string>
+    <string name="update_users_rx1_label">Get Users Rx1</string>
+    <string name="update_users_rx2_label">Get Users Rx2</string>
+    <string name="update_users_rx3_label">Get Users Rx3</string>
+    <string name="update_users_rx4_label">Get Users Rx4</string>
+
+    <string name="update_users_cr_back">&lt;&lt; Back</string>
+    <string name="update_users_cr1_label">Get Users Cr1</string>
+    <string name="update_users_cr2_label">Get Users Cr2</string>
+    <string name="update_users_cr3_label">Get Users Cr3</string>
+
+    <!-- simple listview -->
+    <string name="users_listview_header_label">Users</string>
+    <string name="users_listview_updating_label">Updating …</string>
+    <string name="simple_listview_empty_list_label">-- empty --</string>
+    <string name="simple_listview_empty_no_text" />
+</resources>
