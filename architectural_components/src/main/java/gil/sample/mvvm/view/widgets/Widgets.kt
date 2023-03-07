@@ -10,6 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.flow.SharedFlow
 
+/**
+ * Collection of [Composable] widgets.
+ */
+
 // Toast composable
 @Composable
 fun <T> SimpleToast(

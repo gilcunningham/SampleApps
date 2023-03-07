@@ -38,7 +38,7 @@ class UsersRxFragment : BaseFragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MyApplicationTheme {
-                    UsersScreenRx(mViewModel)
+                    UsersScreenRx()
                 }
             }
         }
@@ -63,7 +63,7 @@ class UsersRxFragment : BaseFragment() {
         mViewModel.onNext.observe(viewLifecycleOwner) { next ->
             Timber.d("onNext - $next")
             if (next) {
-                findNavController().navigate(R.id.action_userRxFragment_to_usersCrFragment)
+                findNavController().navigate(R.id.action_usersRxFragment_next)
             }
         }
 
@@ -71,6 +71,8 @@ class UsersRxFragment : BaseFragment() {
         lifecycleScope.launch {
             mViewModel.onUserSelected.collect { user ->
                 Timber.d("onUserSelected - $user")
+                // sh
+                sharedData.sharedUser.value = user
                 //TODO: shared vm, load next users
             }
         }

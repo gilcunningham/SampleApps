@@ -11,13 +11,26 @@
         android:label="@string/users_rx_fragment_label">
 
         <action
-            android:id="@+id/action_userRxFragment_to_usersCrFragment"
+            android:id="@+id/action_usersRxFragment_next"
             app:destination="@id/UsersCrFragment" />
     </fragment>
     <fragment
         android:id="@+id/UsersCrFragment"
         android:name="gil.sample.mvvm.view.UsersCrFragment"
         android:label="@string/users_cr_fragment_label">
+
+        <action
+            android:id="@+id/action_usersCrFragment_back"
+            app:destination="@id/UsersRxFragment" />
+
+        <action
+            android:id="@+id/action_usersCrFragment_next"
+            app:destination="@id/LastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/LastFragment"
+        android:name="gil.sample.mvvm.view.LastFragment"
+        android:label="@string/users_last_fragment_label">
 
         <action
             android:id="@+id/action_usersCrFragment_to_usersRxFragment"

@@ -1,7 +1,6 @@
 package gil.sample.mvvm.view.widgets
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,17 +8,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import gil.sample.mvvm.R
 import gil.sample.mvvm.viewmodel.UsersCrViewModel
 
 // demo Composable for testing Cr functionality
 @Composable
-fun UsersScreenCr(viewModel: UsersCrViewModel) {
+fun UsersScreenCr(viewModel: UsersCrViewModel = viewModel()) {
 
     // Toast displays selected user
     SimpleToast(
@@ -33,10 +32,10 @@ fun UsersScreenCr(viewModel: UsersCrViewModel) {
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Start
+                horizontalArrangement = Arrangement.End
             ) {
                 SimpleTextButton(
-                    text = stringResource(id = R.string.update_users_cr_back),
+                    text = stringResource(id = R.string.update_users_rx_next),
                     onClick = { viewModel.onNext() }
                 )
             }

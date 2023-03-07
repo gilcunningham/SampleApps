@@ -4,6 +4,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="users_rx_fragment_label">Users With Rx</string>
     <string name="users_cr_fragment_label">Users With Coroutines</string>
+    <string name="users_last_fragment_label">Last Fragment</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
