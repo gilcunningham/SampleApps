@@ -21,8 +21,6 @@ import gil.sample.mvvm.viewmodel.UsersCrViewModel
 @Composable
 fun UsersScreenCr(viewModel: UsersCrViewModel) {
 
-    println("*** UserScreenCr - ${viewModel}")
-
     // Toast displays selected user
     SimpleToast(
         data = viewModel.onUserSelected
@@ -30,7 +28,7 @@ fun UsersScreenCr(viewModel: UsersCrViewModel) {
 
     Surface(
         Modifier.fillMaxSize(),
-        color = Color(0xFFF0F0F0)
+        color = Color(0xFFF0F0F0) // TODO: move Color
     ) {
         Column {
             Row(
@@ -38,7 +36,7 @@ fun UsersScreenCr(viewModel: UsersCrViewModel) {
                 horizontalArrangement = Arrangement.Start
             ) {
                 SimpleTextButton(
-                    text = stringResource(id = R.string.update_users_rx_next),
+                    text = stringResource(id = R.string.update_users_cr_back),
                     onClick = { viewModel.onNext() }
                 )
             }
