@@ -9,7 +9,6 @@ import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.view.widgets.LastScreen
 
 class LastFragment : BaseFragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 /**
- * A wrapper to replace a common pairing of [LiveData] and [MutableLiveData].
+ * A custom wrapper to replace a common pairing of [LiveData] and [MutableLiveData].
  * Intended to be exposed to observers as [LiveData] with [asLiveData] while internally
  * being mutable.
  */

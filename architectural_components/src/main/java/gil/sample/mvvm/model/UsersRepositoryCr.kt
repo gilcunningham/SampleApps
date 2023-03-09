@@ -2,10 +2,11 @@ package gil.sample.mvvm.model
 
 import gil.sample.mvvm.service.UserServiceCr
 import gil.sample.mvvm.service.data.User
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
@@ -15,12 +16,12 @@ import timber.log.Timber
  *
  * TODO : add error handling
  */
-class UsersRepositoryCr : BaseUserRepository() {
+//@Singleton
+class UsersRepositoryCr @Inject constructor(
+    private val userService: UserServiceCr
+) : BaseUserRepository() {
 
-    //TODO inject or pass in
-    private val mUserService = UserServiceCr()
-
-    // TODO incorporate supervisor
+    // TODO incorporate supervisor once we get longer running tasks
     private val jobSupervisor = SupervisorJob()
 
     // internal data using Flow
@@ -31,20 +32,20 @@ class UsersRepositoryCr : BaseUserRepository() {
 
     // flow demo
     val updateUsersFlow = flow {
-        emit(mUserService.fetchUsers())
+        emit(userService.fetchUsers())
     }
 
     // update users
     suspend fun updateUsers() {
         updateUsers {
-            users.value = mUserService.fetchUsers()
+            users.value = userService.fetchUsers()
         }
     }
 
     // update Flow user
     suspend fun updateUsersFlow() {
         updateUsers {
-            mUsersFlow.value = mUserService.fetchUsers()
+            mUsersFlow.value = userService.fetchUsers()
         }
     }
 
@@ -60,6 +61,6 @@ class UsersRepositoryCr : BaseUserRepository() {
         Timber.d("onCleared: supervisor active ${jobSupervisor.isActive}")
         jobSupervisor.cancel()
         Timber.d("onCleared: supervisor active after cancel() ${jobSupervisor.isActive}")
-        mUserService.onCleared()
+        userService.onCleared()
     }
 }

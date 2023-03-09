@@ -2,8 +2,11 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
+    //kotlin("kapt")
     //id("kotlin-reflect")
-    //id("com.google.devtools.ksp").version("1.6.10-1.0.4")
+
 }
 
 android {
@@ -91,12 +94,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-    //implementation("android.arch.lifecycle:extensions:2.2.0")
-    //implementation("android.arch.lifecycle:extensions:2.2.0")
-    //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha05")
 
-    // Hilt //TODO
-    //implementation("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Timber
     implementation("com.jakewharton.timber:timber:4.7.1")
@@ -105,4 +108,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

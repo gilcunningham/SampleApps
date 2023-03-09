@@ -12,5 +12,5 @@ import gil.sample.mvvm.viewmodel.SharedViewModel
 open class BaseFragment : Fragment() {
 
     // shared activity view model
-    val sharedData by activityViewModels<SharedViewModel>()
+    val sharedData: SharedViewModel by activityViewModels()
 }
