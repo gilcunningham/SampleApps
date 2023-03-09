@@ -1,11 +1,10 @@
 package gil.sample.mvvm.service
 
 import gil.sample.mvvm.service.api.UserApiCr
-import gil.sample.mvvm.service.api.UserApiRx
 import gil.sample.mvvm.service.data.User
 import gil.sample.mvvm.service.helper.ApiHelper
 import io.reactivex.rxjava3.plugins.RxJavaPlugins.onError
-import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +18,9 @@ import timber.log.Timber
 /**
  * Users Service implemented with Coroutines.
  */
-class UserServiceCr {
+class UserServiceCr @Inject constructor(
+    private val userApi: UserApiCr
+) {
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         onError(throwable)
@@ -31,7 +32,7 @@ class UserServiceCr {
     )
 
     // inject or pass in
-    private val mUserApi = ApiHelper.instance(UserApiCr::class.java)
+    //private val userApi = ApiHelper.instance(UserApiCr::class.java)
 
     /** TODO: adapter for Result
     suspend fun fetchUsers() : Result<List<User>> {
@@ -44,15 +45,15 @@ class UserServiceCr {
     }
      **/
 
-    suspend fun fetchUsers() : List<User> {
+    suspend fun fetchUsers(): List<User> {
         return serviceCall {
-            mUserApi.fetchUsers()
+            userApi.fetchUsers()
         }.orEmpty()
     }
 
     suspend fun <T> serviceCall(
         serviceDelegate: suspend () -> Response<T>
-    ) : T? = withContext(Dispatchers.IO) {
+    ): T? = withContext(Dispatchers.IO) {
         val response = serviceDelegate()
         // http level logging
         when (response.isSuccessful) {

@@ -1,7 +1,5 @@
 package gil.sample.mvvm.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import gil.sample.mvvm.service.data.AliveData
 import gil.sample.mvvm.service.data.User
 

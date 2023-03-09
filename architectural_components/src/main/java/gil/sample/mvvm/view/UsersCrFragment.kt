@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import gil.sample.mvvm.R
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.view.widgets.UsersScreenCr
@@ -19,9 +21,10 @@ import timber.log.Timber
 /**
  * A sample [Fragment] to display a list of [User]s.
  */
+@AndroidEntryPoint
 class UsersCrFragment : BaseFragment() {
 
-    val mViewModel: UsersCrViewModel by viewModels()
+    private val mViewModel: UsersCrViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -7,8 +7,8 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class User(
 
-    @Json(name = "id")
-    @SerializedName("id")
+    @Json(name = "id") // moshi
+    @SerializedName("id") // okhttp
     val id: Int,
 
     @Json(name = "name")

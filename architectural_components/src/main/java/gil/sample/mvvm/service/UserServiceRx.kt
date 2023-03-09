@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 
 /**
- * Users service.
+ * Users service implemented with Rx.
  */
 class UserServiceRx {
 

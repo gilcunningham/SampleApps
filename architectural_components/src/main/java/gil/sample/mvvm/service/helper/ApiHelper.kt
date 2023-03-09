@@ -14,7 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 
-//TODO: combine moshi and okhttp
+/*
+ * Helper to retrieve a Retrofit instance based on Api.
+ */
 object ApiHelper {
 
     // TODO: move to BaseA[i
@@ -26,7 +28,7 @@ object ApiHelper {
         .callTimeout(10, TimeUnit.SECONDS)
         .connectTimeout(10, TimeUnit.SECONDS)
         .addNetworkInterceptor(interceptor)
-        .addInterceptor(interceptor)
+        //.addInterceptor(interceptor)
         .build()
 
     private val okInstance by lazy {
@@ -58,6 +60,7 @@ object ApiHelper {
 
     private val moshiInstance: Retrofit by lazy {
         Retrofit.Builder()
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(baseUrl)
             .build()
@@ -73,11 +76,9 @@ object ApiHelper {
         return instance
     }
 
-    //combine retrofit instance
-    //https://gist.github.com/Slowhand0309/bdab4bac812ca2aeedcceda268a8f701
-
+    // just an exercise to provide multiple implementations of Retrofit.
+    // mostly interested to see how Moshi works
     fun <T : BaseApi> instance(api: Class<T>): T {
-        //TODO- work on better method
         if (api.isAssignableFrom(UserApiCr::class.java)) {
             Timber.d("instance UserApiCr")
             return moshiInstance.create(api)

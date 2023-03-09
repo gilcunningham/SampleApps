@@ -2,16 +2,21 @@ package gil.sample.mvvm.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import gil.sample.mvvm.R
 import gil.sample.mvvm.model.UsersRepositoryCr
 import gil.sample.mvvm.service.data.User
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class UsersCrViewModel : BaseUsersViewModel() {
+@HiltViewModel
+class UsersCrViewModel @Inject internal constructor(
+    private val userRepo: UsersRepositoryCr
+) : BaseUsersViewModel() {
 
-    val userRepo = UsersRepositoryCr()
+    //val userRepo = UsersRepositoryCr()
 
     // VM exposes the repo's [LiveData]
     val doingWork: LiveData<Boolean> = userRepo.doingWork.asLiveData()
