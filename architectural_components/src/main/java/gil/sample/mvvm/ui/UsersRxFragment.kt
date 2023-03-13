@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import gil.sample.mvvm.R
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.ui.widgets.UsersScreenRx
@@ -22,7 +21,7 @@ import timber.log.Timber
  */
 class UsersRxFragment : BaseFragment() {
 
-    val mViewModel: UsersRxViewModel by viewModels()
+    override val mViewModel: UsersRxViewModel by viewModels()
 
     //val viewModel: UsersRxViewModel by viewModels {
     //    Injector.provideUsersRxViewModelFactory(requireContext())
@@ -56,14 +55,6 @@ class UsersRxFragment : BaseFragment() {
             Timber.d("doingWork --> $working")
         }
 
-        // navigate to next fragment
-        mViewModel.onNext.observe(viewLifecycleOwner) { next ->
-            Timber.d("onNext - $next")
-            if (next) {
-                findNavController().navigate(R.id.action_usersRxFragment_next)
-            }
-        }
-
         // user selected
         lifecycleScope.launch {
             mViewModel.onUserSelected.collect { user ->
@@ -74,4 +65,7 @@ class UsersRxFragment : BaseFragment() {
             }
         }
     }
+
+    override fun getNextNavigation() : Int = R.id.action_usersRxFragment_next
+
 }

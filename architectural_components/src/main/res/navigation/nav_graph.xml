@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/UsersRxFragment"
-        android:name="gil.sample.mvvm.view.UsersRxFragment"
+        android:name="gil.sample.mvvm.ui.UsersRxFragment"
         android:label="@string/users_rx_fragment_label">
 
         <action
@@ -16,11 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/UsersCrFragment"
-        android:name="gil.sample.mvvm.view.UsersCrFragment"
+        android:name="gil.sample.mvvm.ui.UsersCrFragment"
         android:label="@string/users_cr_fragment_label">
 
         <action
             android:id="@+id/action_usersCrFragment_back"
+            app:popUpTo="@id/UsersRxFragment"
             app:destination="@id/UsersRxFragment" />
 
         <action
@@ -29,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/LastFragment"
-        android:name="gil.sample.mvvm.view.LastFragment"
+        android:name="gil.sample.mvvm.ui.LastFragment"
         android:label="@string/users_last_fragment_label">
 
         <action

@@ -12,13 +12,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import gil.sample.mvvm.viewmodel.SharedViewModel
 
 @Composable
 fun LastScreen(sharedData: SharedViewModel) {
-
-    val foo: SharedViewModel by hiltViewModel()
 
     val user by sharedData.sharedUser.observeAsState()
 
