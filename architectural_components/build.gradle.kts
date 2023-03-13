@@ -5,7 +5,6 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
     //kotlin("kapt")
-
     //kotlin("androidx.navigation.safeargs")
 }
 
@@ -49,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
