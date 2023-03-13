@@ -5,8 +5,8 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
     //kotlin("kapt")
-    //id("kotlin-reflect")
 
+    //kotlin("androidx.navigation.safeargs")
 }
 
 android {
@@ -49,12 +49,17 @@ android {
 }
 
 dependencies {
+
     implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    // Navigation
+    val nav_ver = "2.5.3"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_ver")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_ver")
+    //implementation("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_ver")
 
     // RX
     implementation("io.reactivex.rxjava3:rxjava:3.1.5")
@@ -89,12 +94,12 @@ dependencies {
     implementation("androidx.compose.material:material:1.3.1")
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-common:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-runtime:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-
+    val lifecycle_ver = "2.6.0"
+    implementation("androidx.lifecycle:lifecycle-common:$lifecycle_ver")
+    implementation("androidx.lifecycle:lifecycle-runtime:$lifecycle_ver")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_ver")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_ver")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.44")

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +15,7 @@ import gil.sample.mvvm.R
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.ui.widgets.UsersScreenCr
 import gil.sample.mvvm.viewmodel.UsersCrViewModel
+import gil.sample.mvvm.viewmodel.UsersRxViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -23,7 +25,20 @@ import timber.log.Timber
 @AndroidEntryPoint
 class UsersCrFragment : BaseFragment() {
 
-    private val mViewModel: UsersCrViewModel by viewModels()
+    override val mViewModel: UsersCrViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    println("*** handle back")
+                    findNavController().navigateUp()
+                }
+            })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,12 +73,9 @@ class UsersCrFragment : BaseFragment() {
                 }
             }
         }
+    }
 
-        mViewModel.onNext.observe(viewLifecycleOwner) { next ->
-            Timber.d("onNext - $next")
-            if (next) {
-                findNavController().navigate(R.id.action_usersCrFragment_next)
-            }
-        }
+    override fun getNextNavigation(): Int {
+        return R.id.action_usersCrFragment_next
     }
 }

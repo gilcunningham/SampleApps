@@ -22,7 +22,7 @@ import timber.log.Timber
  */
 class UsersRxFragment : BaseFragment() {
 
-    val mViewModel: UsersRxViewModel by viewModels()
+    override val mViewModel: UsersRxViewModel by viewModels()
 
     //val viewModel: UsersRxViewModel by viewModels {
     //    Injector.provideUsersRxViewModelFactory(requireContext())
@@ -56,14 +56,6 @@ class UsersRxFragment : BaseFragment() {
             Timber.d("doingWork --> $working")
         }
 
-        // navigate to next fragment
-        mViewModel.onNext.observe(viewLifecycleOwner) { next ->
-            Timber.d("onNext - $next")
-            if (next) {
-                findNavController().navigate(R.id.action_usersRxFragment_next)
-            }
-        }
-
         // user selected
         lifecycleScope.launch {
             mViewModel.onUserSelected.collect { user ->
@@ -73,5 +65,9 @@ class UsersRxFragment : BaseFragment() {
                 //TODO: shared vm, load next users
             }
         }
+    }
+
+    override fun getNextNavigation() : Int {
+        return R.id.action_usersRxFragment_next
     }
 }

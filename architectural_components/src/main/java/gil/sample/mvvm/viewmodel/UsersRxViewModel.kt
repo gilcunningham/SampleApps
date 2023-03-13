@@ -1,15 +1,15 @@
 package gil.sample.mvvm.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import gil.sample.mvvm.R
-import gil.sample.mvvm.model.UsersRepositoryRx
-import gil.sample.mvvm.service.data.User
+import gil.sample.mvvm.data.repo.UsersRepositoryRx
+import gil.sample.mvvm.data.model.User
 import timber.log.Timber
 
 class UsersRxViewModel : BaseUsersViewModel() {
 
-    // TODO: Hilt or pass-in
+    // NOTTODO: Hilt or pass-in
+    // Left this without injection to compare
     private val mUserRepo = UsersRepositoryRx()
 
     // VM exposes the repo's [LiveData]

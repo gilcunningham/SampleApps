@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import gil.sample.mvvm.R
-import gil.sample.mvvm.model.UsersRepositoryCr
-import gil.sample.mvvm.service.data.User
+import gil.sample.mvvm.data.repo.UsersRepositoryCr
+import gil.sample.mvvm.data.model.User
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
