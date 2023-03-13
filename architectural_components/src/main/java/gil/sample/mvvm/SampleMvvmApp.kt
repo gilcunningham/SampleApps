@@ -1,9 +1,11 @@
 package gil.sample.mvvm
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
+@HiltAndroidApp
 class SampleMvvmApp: Application() {
 
     override fun onCreate() {

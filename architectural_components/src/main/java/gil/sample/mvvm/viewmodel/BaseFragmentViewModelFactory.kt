@@ -10,6 +10,6 @@ class BaseFragmentViewModelFactory : ViewModelProvider.Factory {
             return UsersRxViewModel() as T
         }
 
-        throw NotImplementedError()
+        throw UnsupportedOperationException()
     }
 }
