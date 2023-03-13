@@ -5,7 +5,6 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import gil.sample.mvvm.viewmodel.BaseUsersViewModel
@@ -39,10 +38,6 @@ abstract class BaseFragment : Fragment() {
         // TODO: mess around with navigation in fragment
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
             // Handle the back button event
-        }
-
-        mViewModel.onNext.asLiveData().observe(this) { next ->
-            println("test")
         }
     }
 
