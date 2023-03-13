@@ -12,17 +12,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import gil.sample.mvvm.viewmodel.SharedViewModel
 
 @Composable
 fun LastScreen(sharedData: SharedViewModel) {
-
-    //val foo: SharedViewModel by viewModel()
-
-    //println("*** FOO $foo")
-    //println("*** SHARED $sharedData")
 
     val user by sharedData.sharedUser.observeAsState()
 

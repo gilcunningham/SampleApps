@@ -15,7 +15,9 @@ import gil.sample.mvvm.R
 import gil.sample.mvvm.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() { //}, NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
+//TODO:
+//}, NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -34,21 +36,6 @@ class MainActivity : AppCompatActivity() { //}, NavigationView.OnNavigationItemS
 
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
-
-    /**
-    override fun onSupportNavigateUp(): Boolean {
-        println("*** on onSupportNavigateUp()")
-        //val foo =
-
-        // navController.navigateUp(appBarConfiguration)
-        //        || super.onSupportNavigateUp()
-
-        //println("*** DONE on onSupportNavigateUp() - $foo")
-        //return foo
-
-        return true
-    }
-    **/
 
     /**
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,66 +69,16 @@ class MainActivity : AppCompatActivity() { //}, NavigationView.OnNavigationItemS
     }
     **/
 
-    override fun onNavigateUp(): Boolean {
-        println("*** onNavigateUp()")
-        val foo = super.onNavigateUp()
-        println("*** FOO = $foo")
-        return foo
-    }
-
-    //    // Handle action bar item clicks here. The action bar will
-    //    // automatically handle clicks on the Home/Up button, so long
-    //    // as you specify a parent activity in AndroidManifest.xml.
-    //    return when (item.itemId) {
-    //        R.id.action_settings -> true
-    //        else -> super.onOptionsItemSelected(item)
-    //    }
-    //}
-
     override fun onSupportNavigateUp(): Boolean {
+        //TODO: deeper dive into nav
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
 
-    /**
-    override fun onSupportNavigateUp(): Boolean {
-    println("*** onSupportNavigateUp()")
-    val navController = findNavController(R.id.nav_host_fragment_content_main)
-    val foo = navController.navigateUp(appBarConfiguration)
-    || super.onSupportNavigateUp()
-    println("*** can go back = $foo")
-    return foo
-    }
-     **/
-/**
-    override fun onSupportNavigateUp(): Boolean {
-        //return super.onSupportNavigateUp()
-        println("*** onSupportNavigateUp()")
-        return true
-    }
-**/
-    private fun goBack() : Boolean {
-        println("*** go back")
         // A note:
         // navigateUp() will attempt to pop backstack and if nothing exists, leave the app and
         // return to previous flow i.e. another app deep linked to this Activity and flow is
         // returned to it.
         // popBackStack() will attempt to pop backstack and if nothing exists, do nothing
-        //
-        //val foo = navController.navigateUp()
-
-        //need to resolve
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-
-        //val test2 : UsersCrFragmentDirections =
-
-        val test = navController.currentBackStackEntry
-        println("*** test = $test")
-
-        //val foo = navController.navigateUp(appBarConfiguration)
-        val foo = navController.navigateUp()
-        println("*** done go back - $foo")
-        return foo
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
     }
 }

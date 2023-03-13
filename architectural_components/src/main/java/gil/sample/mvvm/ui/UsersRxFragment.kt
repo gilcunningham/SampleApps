@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import gil.sample.mvvm.R
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.ui.widgets.UsersScreenRx
@@ -67,7 +66,6 @@ class UsersRxFragment : BaseFragment() {
         }
     }
 
-    override fun getNextNavigation() : Int {
-        return R.id.action_usersRxFragment_next
-    }
+    override fun getNextNavigation() : Int = R.id.action_usersRxFragment_next
+
 }

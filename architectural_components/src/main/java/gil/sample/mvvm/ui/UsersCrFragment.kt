@@ -15,7 +15,6 @@ import gil.sample.mvvm.R
 import gil.sample.mvvm.theme.MyApplicationTheme
 import gil.sample.mvvm.ui.widgets.UsersScreenCr
 import gil.sample.mvvm.viewmodel.UsersCrViewModel
-import gil.sample.mvvm.viewmodel.UsersRxViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -75,7 +74,6 @@ class UsersCrFragment : BaseFragment() {
         }
     }
 
-    override fun getNextNavigation(): Int {
-        return R.id.action_usersCrFragment_next
-    }
+    override fun getNextNavigation(): Int = R.id.action_usersCrFragment_next
+
 }
