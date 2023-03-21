@@ -1,8 +1,10 @@
 package gil.sample.mvvm.data.repo
 
+import gil.sample.mvvm.data.dao.UserDao
 import gil.sample.mvvm.data.service.UserServiceCr
 import gil.sample.mvvm.data.model.User
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,10 +17,11 @@ import timber.log.Timber
  *
  * TODO : add error handling
  */
-//@Singleton
+@Singleton
 class UsersRepositoryCr @Inject constructor(
-    private val userService: UserServiceCr
-) : BaseUserRepository() {
+    private val userService: UserServiceCr,
+    private val userDao: UserDao
+) : BaseUserRepository(userDao) {
 
     // TODO incorporate supervisor once we get longer running tasks
     private val jobSupervisor = SupervisorJob()
@@ -37,7 +40,8 @@ class UsersRepositoryCr @Inject constructor(
     // update users
     suspend fun updateUsers() {
         updateUsers {
-            users.value = userService.fetchUsers()
+            val users = userService.fetchUsers()
+            userDao.insertAll(users)
         }
     }
 

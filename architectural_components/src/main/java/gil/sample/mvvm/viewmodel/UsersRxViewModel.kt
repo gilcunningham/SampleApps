@@ -15,7 +15,7 @@ class UsersRxViewModel : BaseUsersViewModel() {
     // VM exposes the repo's [LiveData]
     val doingWork: LiveData<Boolean> = mUserRepo.doingWork.asLiveData()
 
-    val users: LiveData<List<User>> = mUserRepo.users.asLiveData()
+    val users: LiveData<List<User>> = mUserRepo.users
 
     fun onUpdateUsersRx() {
         updateUsers("onUpdateUsersRx()") {

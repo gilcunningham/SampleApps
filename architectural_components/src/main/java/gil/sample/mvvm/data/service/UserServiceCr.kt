@@ -21,6 +21,7 @@ class UserServiceCr @Inject constructor(
     private val userApi: UserApiCr
 ) {
 
+    // TODO
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         onError(throwable)
     }
@@ -29,9 +30,6 @@ class UserServiceCr @Inject constructor(
     private val mServiceScope = CoroutineScope(
         Dispatchers.IO + SupervisorJob() + exceptionHandler
     )
-
-    // inject or pass in
-    //private val userApi = ApiHelper.instance(UserApiCr::class.java)
 
     /** TODO: adapter for Result
     suspend fun fetchUsers() : Result<List<User>> {

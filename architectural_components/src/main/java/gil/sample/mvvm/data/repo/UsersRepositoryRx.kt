@@ -36,7 +36,7 @@ class UsersRepositoryRx : BaseUserRepository() {
             mUserServiceRx.fetchUsersObserver(
                 object : Observer<List<User>> {
                     override fun onNext(newUsers: List<User>) {
-                        users.value = newUsers.shuffled()
+                        mUsers.value = newUsers.shuffled()
                         Timber.d("--> after fetchUsersObserver() disposables size: ${mUserDisposables.size()}")
                     }
 
@@ -65,7 +65,7 @@ class UsersRepositoryRx : BaseUserRepository() {
         updateUsers {
             mUserServiceRx.fetchUsersConsumer(
                 { newUsers ->
-                    users.value = newUsers.shuffled()
+                    mUsers.value = newUsers.shuffled()
                     doingWork.value = false
                 },
                 { throwable -> Timber.d(throwable) }
@@ -81,7 +81,7 @@ class UsersRepositoryRx : BaseUserRepository() {
     fun updateUsersWithLambda() {
         updateUsers {
             mUserServiceRx.fetchUsersLambda { newUsers ->
-                users.value = newUsers.shuffled()
+                mUsers.value = newUsers.shuffled()
                 doingWork.value = false
             }
         }
@@ -99,7 +99,7 @@ class UsersRepositoryRx : BaseUserRepository() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         { newUsers ->
-                            users.value = newUsers.shuffled()
+                            mUsers.value = newUsers.shuffled()
                             doingWork.value = false
                         },
                         { error -> error.printStackTrace() } // TODO: better handling
