@@ -59,9 +59,8 @@ class UsersRxFragment : BaseFragment() {
         lifecycleScope.launch {
             mViewModel.onUserSelected.collect { user ->
                 Timber.d("onUserSelected - $user")
-                // sh
+                // shared user
                 sharedData.sharedUser.value = user
-                //TODO: shared vm, load next users
             }
         }
     }

@@ -54,9 +54,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // Navigation
-    val nav_ver = "2.5.3"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_ver")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_ver")
+    val nav_version = "2.5.3"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     //implementation("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_ver")
 
     // RX
@@ -65,9 +65,10 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+    val retrofit_version = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:$retrofit_version")
 
     // Retrofit + OkHttp
     implementation("com.squareup.okhttp3:logging-interceptor:3.5.0")
@@ -92,20 +93,27 @@ dependencies {
     implementation("androidx.compose.material:material:1.3.1")
 
     // Lifecycle
-    val lifecycle_ver = "2.6.0"
-    implementation("androidx.lifecycle:lifecycle-common:$lifecycle_ver")
-    implementation("androidx.lifecycle:lifecycle-runtime:$lifecycle_ver")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_ver")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_ver")
+    val lifecycle_version = "2.6.0"
+    implementation("androidx.lifecycle:lifecycle-common:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("com.google.dagger:hilt-android:2.44.2")
     kapt("com.google.dagger:hilt-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    // Room
+    val room_version = "2.5.0"
+    implementation("androidx.room:room-ktx:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+
     // Timber
-    implementation("com.jakewharton.timber:timber:4.7.1")
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     // Tests
     testImplementation("junit:junit:4.13.2")

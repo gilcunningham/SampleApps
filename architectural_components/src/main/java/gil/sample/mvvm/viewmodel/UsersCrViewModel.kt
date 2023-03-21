@@ -16,12 +16,14 @@ class UsersCrViewModel @Inject internal constructor(
     private val userRepo: UsersRepositoryCr
 ) : BaseUsersViewModel() {
 
-    //val userRepo = UsersRepositoryCr()
-    
+    // can inject here as well
+    //@Inject
+    //lateinit var userRepo: UsersRepositoryCr
+
     // VM exposes the repo's [LiveData]
     val doingWork: LiveData<Boolean> = userRepo.doingWork.asLiveData()
 
-    val users: LiveData<List<User>> = userRepo.users.asLiveData()
+    val users: LiveData<List<User>> = userRepo.users
 
     // example with Flow
     val usersFlow: Flow<List<User>> = userRepo.usersFlow

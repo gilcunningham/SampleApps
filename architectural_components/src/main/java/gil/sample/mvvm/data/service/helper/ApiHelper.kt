@@ -87,6 +87,6 @@ object ApiHelper {
             return okInstance.create(api)
         }
 
-        throw NotImplementedError("$api is not supported, please add")
+        throw UnsupportedOperationException("$api is not supported, please add")
     }
 }
