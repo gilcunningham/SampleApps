@@ -20,21 +20,12 @@ abstract class BaseUsersViewModel : ViewModel() {
     // list header
     val listHeader = mutableStateOf(R.string.users_listview_header_label)
 
-    //private var mOnNext = MutableLiveData<Boolean>()
-    //val onNext: LiveData<Boolean> = mOnNext
-    // Learning note:
-    // Originally this observable was a LiveData, but this will emit again, as it should,
-    // upon return to the observing View (i.e. back functionality). Overhead could be added
-    // to toggle the LiveData to "false", but instead this was updated to a MutableSharedFlow
-    // which will emit once and more appropriate for this use case
-    private var mOnNext = MutableSharedFlow<Boolean>()
-    val onNext: Flow<Boolean> = mOnNext
+    private var mOnNext = MutableLiveData<Boolean>()
+    val onNext: LiveData<Boolean> = mOnNext
 
     fun onNext() {
         Timber.d("onNext()")
-        viewModelScope.launch {
-            mOnNext.emit(true)
-        }
+        mOnNext.value = true
     }
 
     private val mOnUserSelected = MutableSharedFlow<User>()
