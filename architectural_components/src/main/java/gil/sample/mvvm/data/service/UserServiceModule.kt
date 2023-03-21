@@ -17,7 +17,7 @@ import javax.inject.Singleton
 object UserServiceModule {
 
     @Provides
-    //@Singleton
+    @Singleton
     fun provideUserServiceCr(): UserServiceCr {
         return UserServiceCr(
             ApiHelper.instance(UserApiCr::class.java)
