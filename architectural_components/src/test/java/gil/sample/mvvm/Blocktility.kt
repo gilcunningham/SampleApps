@@ -6,6 +6,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class Blocktility private constructor(
     private val condition: Callable<Boolean>,
@@ -57,7 +62,7 @@ class Blocktility private constructor(
 
         fun until(callable: Callable<Boolean>): Blocktility {
             val blocktility = Blocktility(callable, this)
-            blocktility.execute()
+            blocktility.execute() // blocking
 
             return blocktility
         }
@@ -68,7 +73,7 @@ class Blocktility private constructor(
             .interval(blockData.interval, blockData.intervalTimeUnit)
             .subscribeOn(Schedulers.trampoline())
             .observeOn(Schedulers.trampoline())
-            .takeWhile { !completedCondition() }
+            .takeWhile { !completedCondition() } // blocking
             .subscribe()
     }
 

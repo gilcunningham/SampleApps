@@ -28,7 +28,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
-
+            isMinifyEnabled = false
         }
     }
     compileOptions {
@@ -43,16 +43,16 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.10.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:1.10.0")
 
     // Navigation
     val nav_version = "2.5.3"
@@ -124,11 +124,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
-    implementation("org.hamcrest:hamcrest-core:2.2")
-    implementation("org.hamcrest:hamcrest-library:2.2")
+    //implementation("org.hamcrest:hamcrest-core:2.2")
+    //implementation("org.hamcrest:hamcrest-library:2.2")
     //testImplementation("android.arch.core:core-testing:1.1.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    //testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 }
 
 // Allow references to generated code

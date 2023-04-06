@@ -89,10 +89,7 @@ class UserServiceTest {
             this.users = users
         }
 
-        // need timeout
-        block().until {
-            users != null
-        }
+        block().until { users != null }
 
         assertNotNull(users)
         users?.isNotEmpty()?.let { assertTrue(it) }
