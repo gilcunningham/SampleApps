@@ -103,18 +103,15 @@ class UserServiceTest {
         service.fetchUsersObserver(
             object : Observer<List<User>> {
                 override fun onSubscribe(d: Disposable) {
-                    println("onSubscribe: $d")
                     disposable = d
                 }
 
                 override fun onError(e: Throwable) {
                     throwable = e
-                    println("onError: $e")
                 }
 
                 override fun onComplete() {
                     completed = true
-                    println("*** onComplete")
                 }
 
                 override fun onNext(usersList: List<User>) {
@@ -133,16 +130,20 @@ class UserServiceTest {
     }
 
     private fun setupUserServiceCr(): UserServiceCr {
+        initData()
         val serviceApi = ApiHelper.instance(UserApiCr::class.java)
         return UserServiceCr(serviceApi)
     }
 
     private fun setupUserServiceRx(): UserServiceRx {
+        initData()
+        return UserServiceRx()
+    }
+
+    private fun initData() {
         users = null
         throwable = null
         disposable = null
         completed = false
-
-        return UserServiceRx()
     }
 }
