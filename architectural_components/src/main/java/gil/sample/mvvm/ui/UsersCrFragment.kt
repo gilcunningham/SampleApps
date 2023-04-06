@@ -27,7 +27,8 @@ class UsersCrFragment : BaseFragment() {
     override val mViewModel: UsersCrViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {

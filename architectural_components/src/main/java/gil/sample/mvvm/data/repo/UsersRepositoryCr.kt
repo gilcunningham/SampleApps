@@ -1,15 +1,13 @@
 package gil.sample.mvvm.data.repo
 
 import gil.sample.mvvm.data.dao.UserDao
-import gil.sample.mvvm.data.service.UserServiceCr
 import gil.sample.mvvm.data.model.User
+import gil.sample.mvvm.data.service.UserServiceCr
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 
 /**
  * A [User]s repository.
@@ -24,12 +22,13 @@ class UsersRepositoryCr @Inject constructor(
 ) : BaseUserRepository(userDao) {
 
     // TODO incorporate supervisor once we get longer running tasks
-    private val jobSupervisor = SupervisorJob()
+    //private val jobSupervisor = SupervisorJob()
 
     // internal data using Flow
     private val mUsersFlow = MutableStateFlow<List<User>>(listOf())
 
     // exposed data as Flow
+    // Use this for longer running task TODO
     val usersFlow: Flow<List<User>> = mUsersFlow
 
     // flow demo
@@ -61,9 +60,10 @@ class UsersRepositoryCr @Inject constructor(
 
     @Override
     override fun onCleared() {
-        Timber.d("onCleared: supervisor active ${jobSupervisor.isActive}")
-        jobSupervisor.cancel()
-        Timber.d("onCleared: supervisor active after cancel() ${jobSupervisor.isActive}")
-        userService.onCleared()
+        //TODO: longer running tasks
+        //Timber.d("onCleared: supervisor active ${jobSupervisor.isActive}")
+        //jobSupervisor.cancel()
+        //Timber.d("onCleared: supervisor active after cancel() ${jobSupervisor.isActive}")
+        //userService.onCleared()
     }
 }

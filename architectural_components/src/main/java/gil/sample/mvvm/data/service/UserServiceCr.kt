@@ -1,7 +1,7 @@
 package gil.sample.mvvm.data.service
 
-import gil.sample.mvvm.data.service.api.UserApiCr
 import gil.sample.mvvm.data.model.User
+import gil.sample.mvvm.data.service.api.UserApiCr
 import io.reactivex.rxjava3.plugins.RxJavaPlugins.onError
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,13 +20,11 @@ import timber.log.Timber
 class UserServiceCr @Inject constructor(
     private val userApi: UserApiCr
 ) {
-
-    // TODO
+    //TODO : longer running service
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         onError(throwable)
     }
 
-    //TODO : play around with member scope
     private val mServiceScope = CoroutineScope(
         Dispatchers.IO + SupervisorJob() + exceptionHandler
     )
@@ -42,13 +40,23 @@ class UserServiceCr @Inject constructor(
     }
      **/
 
+    /**
+     * Fetch a list of users.
+     * @return List<User> //TODO: make livedata
+     */
     suspend fun fetchUsers(): List<User> {
         return serviceCall {
             userApi.fetchUsers()
         }.orEmpty()
     }
 
-    suspend fun <T> serviceCall(
+    /**
+     * Generic service call that takes a [Response] producing suspending function returns the
+     * [Response] body as [T].
+     * @param serviceDelegate A suspending function that produces a [Response] type T.
+     * @return The [Response] body [T]
+     */
+    protected suspend fun <T> serviceCall(
         serviceDelegate: suspend () -> Response<T>
     ): T? = withContext(Dispatchers.IO) {
         val response = serviceDelegate()
@@ -65,9 +73,10 @@ class UserServiceCr @Inject constructor(
         response.body()
     }
 
-    fun onCleared() {
-        Timber.d("onCleared: service scope - ${mServiceScope.isActive}")
-        mServiceScope.cancel()
-        Timber.d("onCleared: service scope after cancel() - ${mServiceScope.isActive}")
-    }
+    //TODO: long running coroutine service
+    //fun onCleared() {
+    //    Timber.d("onCleared: service scope - ${mServiceScope.isActive}")
+    //    mServiceScope.cancel()
+    //    Timber.d("onCleared: service scope after cancel() - ${mServiceScope.isActive}")
+    //}
 }

@@ -2,13 +2,12 @@ package gil.sample.mvvm.viewmodel
 
 import androidx.lifecycle.LiveData
 import gil.sample.mvvm.R
-import gil.sample.mvvm.data.repo.UsersRepositoryRx
 import gil.sample.mvvm.data.model.User
+import gil.sample.mvvm.data.repo.UsersRepositoryRx
 import timber.log.Timber
 
 class UsersRxViewModel : BaseUsersViewModel() {
 
-    // NOTTODO: Hilt or pass-in
     // Left this without injection to compare
     private val mUserRepo = UsersRepositoryRx()
 
@@ -47,6 +46,7 @@ class UsersRxViewModel : BaseUsersViewModel() {
     ) {
         msg?.let { Timber.d(it) }
         listHeader.value = R.string.users_listview_updating_label
+        println("*** HERE")
         updateUsersDelegate()
     }
 }

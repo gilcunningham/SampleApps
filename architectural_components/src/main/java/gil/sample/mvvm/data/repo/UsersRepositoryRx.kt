@@ -1,13 +1,15 @@
 package gil.sample.mvvm.data.repo
 
-import gil.sample.mvvm.data.service.UserServiceRx
+import gil.sample.mvvm.SchedulersProvider
 import gil.sample.mvvm.data.model.User
+import gil.sample.mvvm.data.service.UserServiceRx
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 import timber.log.Timber
 
 /**
@@ -27,34 +29,36 @@ class UsersRepositoryRx : BaseUserRepository() {
 
     private val mUserDisposables = CompositeDisposable()
 
+    //@Inject
+    //lateinit var schedulers: SchedulersProvider
+
     /**
      * Updates the [users].
      * This implementation uses an anonymous [Observer] to consume the [Observable].
      */
     fun updateUsersWithObserver() {
-        updateUsers {
-            mUserServiceRx.fetchUsersObserver(
-                object : Observer<List<User>> {
-                    override fun onNext(newUsers: List<User>) {
-                        mUsers.value = newUsers.shuffled()
-                        Timber.d("--> after fetchUsersObserver() disposables size: ${mUserDisposables.size()}")
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                        mUserDisposables.add(d)
-                    }
-
-                    override fun onError(t: Throwable) { //TODO: improve
-                        Timber.d(t)
-                    }
-
-                    override fun onComplete() {
-                        doingWork.value = false
-                        Timber.d("onComplete")
-                    }
+        doingWork.value = true
+        mUserServiceRx.fetchUsersObserver(
+            object : Observer<List<User>> {
+                override fun onNext(newUsers: List<User>) {
+                    mUsers.value = newUsers.shuffled()
+                    Timber.d("--> after fetchUsersObserver() disposables size: ${mUserDisposables.size()}")
                 }
-            )
-        }
+
+                override fun onSubscribe(d: Disposable) {
+                    mUserDisposables.add(d)
+                }
+
+                override fun onError(t: Throwable) { //TODO: improve
+                    Timber.d(t)
+                }
+
+                override fun onComplete() {
+                    doingWork.value = false
+                    Timber.d("onComplete")
+                }
+            }
+        )
     }
 
     /**
@@ -62,15 +66,14 @@ class UsersRepositoryRx : BaseUserRepository() {
      * This implementation uses anonymous [Consumer]s to consume the [Observable].
      */
     fun updateUsersWithConsumer() {
-        updateUsers {
-            mUserServiceRx.fetchUsersConsumer(
-                { newUsers ->
-                    mUsers.value = newUsers.shuffled()
-                    doingWork.value = false
-                },
-                { throwable -> Timber.d(throwable) }
-            )
-        }
+        doingWork.value = true
+        mUserServiceRx.fetchUsersConsumer(
+            { newUsers ->
+                mUsers.value = newUsers.shuffled()
+                doingWork.value = false
+            },
+            { throwable -> Timber.d(throwable) }
+        )
     }
 
     /**
@@ -79,12 +82,13 @@ class UsersRepositoryRx : BaseUserRepository() {
      * Note: The service is responsible for error handling.
      */
     fun updateUsersWithLambda() {
-        updateUsers {
-            mUserServiceRx.fetchUsersLambda { newUsers ->
-                mUsers.value = newUsers.shuffled()
-                doingWork.value = false
-            }
+        doingWork.value = true
+
+        mUserServiceRx.fetchUsersLambda { newUsers ->
+            mUsers.value = newUsers.shuffled()
+            doingWork.value = false
         }
+
     }
 
     /**
@@ -92,20 +96,23 @@ class UsersRepositoryRx : BaseUserRepository() {
      * This implementation subscribes to the Observable and consumes onNext and onError.
      */
     fun updateUsers() {
-        updateUsers {
-            mUserDisposables.add(
-                mUserServiceRx.fetchUsers()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        { newUsers ->
-                            mUsers.value = newUsers.shuffled()
-                            doingWork.value = false
-                        },
-                        { error -> error.printStackTrace() } // TODO: better handling
-                    )
-            )
-        }
+
+        println("*** fun updateUsers()")
+
+        doingWork.value = true
+
+        mUserDisposables.add(
+            mUserServiceRx.fetchUsers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { newUsers ->
+                        mUsers.value = newUsers.shuffled()
+                        doingWork.value = false
+                    },
+                    { error -> error.printStackTrace() } // TODO: better handling
+                )
+        )
     }
 
     @Override
@@ -115,14 +122,4 @@ class UsersRepositoryRx : BaseUserRepository() {
         mUserDisposables.clear()
         Timber.d("onCleared: disposable after clear(), size: ${mUserDisposables.size()}")
     }
-
-    /**
-     * Update users utility method.
-     * @param updateUsers Update users lambda.
-     */
-    private fun updateUsers(updateUsersDelegate: () -> Unit) {
-        doingWork.value = true
-        updateUsersDelegate()
-    }
-
 }
